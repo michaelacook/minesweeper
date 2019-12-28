@@ -51,6 +51,9 @@ button {
 
 #displays {
     height: 150px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
  .flagged {
@@ -74,4 +77,41 @@ button {
 .mineCount {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+#game-status {
+    position: relative;
+    top: 20px;
+}
+
+/* 52px for each smiley */
+
+.smiley {
+    width: 52px;
+    height: 52px;
+    background: url(../img/smileysprite.png) 0 0;
+}
+
+.down-smiley {
+    width: 52px;
+    height: 52px;
+    background: url(../img/smileysprite.png) -52 0;
+}
+
+.o-smiley {
+    width: 52px;
+    height: 52px;
+    background: url(../img/smileysprite.png) -104 0;
+}
+
+.lose-smiley {
+    width: 52px;
+    height: 52px;
+    background: url(../img/smileysprite.png) -156 0;
+}
+
+.win-smiley {
+    width: 52px;
+    height: 52px;
+    background: url(../img/smileysprite.png) -208 0;
 }

@@ -329,24 +329,6 @@ class Grid
     }
 
 
-    handleRightClicks(id)
-    {
-        const space = this.getSpaceById(id);
-        if (space.status === 'open') {
-            return;
-        } else {
-            space.rightClicks++;
-            if (space.rightClicks === 1) {
-                this.flagSpace(id);
-            } else if (space.rightClicks === 2) {
-                this.questionMarkSpace(id);
-            } else if (space.rightClicks === 3) {
-                this.clearSpace(id);
-            }
-        }
-    }
-
-
     get flattenedSpaces()
     {
         const flattened = new Array();
