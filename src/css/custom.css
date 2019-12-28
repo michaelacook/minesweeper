@@ -110,11 +110,13 @@ button {
 .lose-smiley {
     width: 52px;
     height: 52px;
-    background: url(../img/smileysprite.png) -156 0;
+    background: url(../img/smileysprite.png);
+    background-position: -156px 0;
 }
 
 .win-smiley {
     width: 52px;
     height: 52px;
-    background: url(../img/smileysprite.png) -208 0;
+    background: url(../img/smileysprite.png);
+    background-position: -208px 0;
 }

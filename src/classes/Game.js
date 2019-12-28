@@ -25,6 +25,8 @@ class Game
         if (space.hasMine) {
             this.active = false;
             this.grid.openAllMines(space);
+            document.getElementById('game-status').classList.remove('smiley');
+            document.getElementById('game-status').className = 'lose-smiley';
             return true;
         }
     }
@@ -34,6 +36,8 @@ class Game
     {
         if (this.flaggedMines === this.mines) {
             this.active = false;
+            document.getElementById('game-status').classList.remove('smiley');
+            document.getElementById('game-status').className = 'win-smiley';
         }
     }
 
@@ -71,15 +75,18 @@ class Game
                 this.checkForWin();
             } else if (event.type === 'click' &&
                        event.target.tagName === 'TD') {
-                       this.grid.openSpace(event.target.id);
                        const space = this.grid.getSpaceById(event.target.id);
-                       if (this.checkForGameOver(space)) {
-                           return;
+                       if (space.status == null) {
+                           this.grid.openSpace(space.id);
+                           if (this.checkForGameOver(space)) {
+                               return;
+                           }
+                           if (space.borderingMinesCount === 0) {
+                               const connected = this.grid.getConnectedSpaces(space);
+                               connected.forEach(space => this.grid.openSpace(space.id));
+                           }
                        }
-                       if (space.borderingMinesCount === 0) {
-                           const connected = this.grid.getConnectedSpaces(space);
-                           connected.forEach(space => this.grid.openSpace(space.id));
-                       }
+
             }
         }
     }
