@@ -180,7 +180,6 @@ class Grid
                     }
                 }
             }
-            console.log(output)
             return output;
         }
     }
@@ -205,12 +204,22 @@ class Grid
     }
 
 
-    getConnectedDiagonalSpaces(space)
+    getHorizontalVerticalConnected(space)
     {
-        return [
-            ...this.getLeftDiagonalConnected(space),
-            ...this.getRightDiagonalConnected(space)
-        ];
+        const output = new Array();
+        const vertical = this.getVerticalConnected(space);
+        const horizontal = this.getHorizontalConnected(space);
+        if (vertical) {
+            if (vertical.length > 0) {
+                output.push(...vertical);
+            }
+        }
+        if (horizontal) {
+            if (horizontal.length > 0) {
+                output.push(...horizontal);
+            }
+        }
+        return output;
     }
 
 

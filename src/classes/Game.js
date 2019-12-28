@@ -79,23 +79,19 @@ class Game
                                return;
                            }
                            if (space.borderingMinesCount === 0) {
-                               const diagonalConnected = this.grid.getDiagonalConnected(space);
-                               const vertical = this.grid.getHorizontalConnected(space);
-                               const horizontal = this.grid.getVerticalConnected(space);
-                               diagonalConnected.forEach(space => this.grid.openSpace(space.id));
-                               vertical.forEach(space => {
+                               const horiztonalVertical = this.grid.getHorizontalVerticalConnected(space);
+                               const diagonal = this.grid.getDiagonalConnected(space);
+                               [ ...horiztonalVertical, ...diagonal].forEach(space => {
+                                   const neighbouringSpaces = this.grid.getBorderingSpaces(space);
                                    this.grid.openSpace(space.id);
-                                   const diag = this.grid.getDiagonalConnected(space);
-                                   diag.forEach(space => this.grid.openSpace(space.id));
-                               });
-                               horizontal.forEach(space => {
-                                   this.grid.openSpace(space.id);
-                                   const diag = this.grid.getDiagonalConnected(space);
-                                   diag.forEach(space => this.grid.openSpace(space.id));
+                                   neighbouringSpaces.forEach(space => {
+                                       if (!space.hasMine && space.status === null) {
+                                           this.grid.openSpace(space.id);
+                                       }
+                                   });
                                });
                            }
                        }
-
             }
         }
     }
