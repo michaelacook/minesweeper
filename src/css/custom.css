@@ -89,19 +89,22 @@ button {
 .smiley {
     width: 52px;
     height: 52px;
-    background: url(../img/smileysprite.png) 0 0;
+    background: url(../img/smileysprite.png);
 }
 
 .down-smiley {
+    display: inline-block;
     width: 52px;
     height: 52px;
-    background: url(../img/smileysprite.png) -52 0;
+    background: url(../img/smileysprite.png);
+    background-position: -51px 0;
 }
 
 .o-smiley {
     width: 52px;
     height: 52px;
-    background: url(../img/smileysprite.png) -104 0;
+    background: url(../img/smileysprite.png);
+    background-position: -104px 0;
 }
 
 .lose-smiley {

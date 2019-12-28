@@ -15,6 +15,8 @@ class Game
     {
         this.grid = new Grid(10, 8);
         this.active = true;
+        this.flaggedMines = 0; // whenever a bomb is flagged
+        this.flags = 0; // whenever a flag is used
     }
 
 
@@ -56,6 +58,9 @@ class Game
             }
         }
     }
+
+
+    // write a method to toggle the smiley class
 
 
     handleClick(event)
