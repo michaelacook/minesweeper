@@ -4,10 +4,10 @@ class Game
     constructor(difficulty = 'beginner', mines = 10)
     {
         this.difficulty = difficulty;
-        this.active = false;
         this.mines = mines;
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used
+        this.start(); // automatically start game on page load
     }
 
 
@@ -78,19 +78,7 @@ class Game
                            if (this.checkForGameOver(space)) {
                                return;
                            }
-                           if (space.borderingMinesCount === 0) {
-                               const horiztonalVertical = this.grid.getHorizontalVerticalConnected(space);
-                               const diagonal = this.grid.getDiagonalConnected(space);
-                               [ ...horiztonalVertical, ...diagonal].forEach(space => {
-                                   const neighbouringSpaces = this.grid.getBorderingSpaces(space);
-                                   this.grid.openSpace(space.id);
-                                   neighbouringSpaces.forEach(space => {
-                                       if (!space.hasMine && space.status === null) {
-                                           this.grid.openSpace(space.id);
-                                       }
-                                   });
-                               });
-                           }
+                           this.grid.openAdjoiningSpaces(space);
                        }
             }
         }

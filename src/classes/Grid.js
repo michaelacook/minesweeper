@@ -27,199 +27,42 @@ class Grid
     }
 
 
-    getHorizontalConnected(space)
+    openAdjoiningSpaces(space)
     {
-        if (space.borderingMinesCount === 0) {
-            const output = new Array();
-            if (space.x !== 7) {
-                for (let i = space.x + 1; i < 8; i++) {
-                    let id = `col-${i}-row-${space.y}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            if (item.hasMine) {
-                                break;
-                            } else {
-                                output.push(item);
-                            }
-                        } else {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            if (space.x > 0) {
-                for (let i = space.x - 1; i >= 0; i--) {
-                    let id = `col-${i}-row-${space.y}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            output.push(item);
-                        } else {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            return output;
+        if (space.isEmpty) {
+
+            let loop = true;
+
+            const neighbouring = this.getBorderingSpaces(space).filter(space => !space.hasMine);
+            neighbouring.forEach(space => this.openSpace(space.id));
+            const next = [];
+
+            // while (loop) {
+            //
+            //     const next = [];
+            //
+            //     toOpen.forEach(space => {
+            //
+            //         this.openSpace(space.id);
+            //
+            //         const neighbouring = this.getBorderingSpaces(space);
+            //
+            //         neighbouring.forEach(space => {
+            //             if (!space.hasMine && space.isEmpty) {
+            //                 next.push(space);
+            //             }
+            //         });
+            //     });
+            //
+            //     if (next.length > 0) {
+            //         toOpen = next;
+            //         break;
+            //     } else {
+            //         loop = false;
+            //     }
+            //
+            // }
         }
-    }
-
-
-    getVerticalConnected(space)
-    {
-        if (space.borderingMinesCount === 0) {
-            const output = new Array();
-            if (space.y !== 9) {
-                for (let i = space.y + 1; i < 10; i++) {
-                    const id = `col-${space.x}-row-${i}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            output.push(item);
-                        } else {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            if (space.y !== 0) {
-                for (let i = space.y - 1; i >= 0; i--) {
-                    const id = `col-${space.x}-row-${i}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            output.push(item);
-                        } else {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            return output;
-        }
-    }
-
-
-    getRightDiagonalConnected(space)
-    {
-        if (space.borderingMinesCount === 0) {
-            const output = new Array();
-            if (space.x !== 7) {
-                for (let i = 1; i < 8; i++) {
-                    const id = `col-${space.x + i}-row-${space.y + i}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            output.push(item);
-                        } else if (item.borderingMinesCount > 0) {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            if (space.y > 0) {
-                for (let i = 1; i < 9; i++) {
-                    const id = `col-${space.x - i}-row-${space.y - i}`;
-                    const item = this.getSpaceById(id);
-                    if (item.status === null) {
-                        if (item.borderingMinesCount === 0) {
-                            output.push(item);
-                        } else if (item.borderingMinesCount > 0) {
-                            output.push(item);
-                            break;
-                        }
-                    }
-                }
-            }
-            return output;
-        }
-    }
-
-
-    getLeftDiagonalConnected(space)
-    {
-        if (space.borderingMinesCount === 0) {
-            const output = new Array();
-            if (space.borderingMinesCount === 0) {
-                if (space.x > 0) {
-                    let y = space.y + 1;
-                    for (let i = space.x - 1; i >= 0; i--) {
-                        const id = `col-${i}-row-${y}`;
-                        y++;
-                        const item = this.getSpaceById(id);
-                        if (item.status === null) {
-                            if (item.borderingMinesCount === 0) {
-                                output.push(item);
-                            } else if (item.borderingMinesCount > 0) {
-                                output.push(item);
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (space.y > 0) {
-                    let y = space.y - 1;
-                    for (let i = space.x + 1; i <= 8; i++) {
-                        const id = `col-${i}-row-${y}`;
-                        y--;
-                        const item = this.getSpaceById(id);
-                        if (item.status === null) {
-                            if (item.borderingMinesCount === 0) {
-                                output.push(item);
-                            } else if (item.borderingMinesCount > 0) {
-                                output.push(item);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            return output;
-        }
-    }
-
-
-    getDiagonalConnected(space)
-    {
-        const output = new Array();
-        const right = this.getRightDiagonalConnected(space);
-        const left = this.getLeftDiagonalConnected(space);
-        if (right) {
-            if (right.length > 0) {
-                output.push(...right);
-            }
-        }
-        if (left) {
-            if (left.length > 0) {
-                output.push(...left);
-            }
-        }
-        return output;
-    }
-
-
-    getHorizontalVerticalConnected(space)
-    {
-        const output = new Array();
-        const vertical = this.getVerticalConnected(space);
-        const horizontal = this.getHorizontalConnected(space);
-        if (vertical) {
-            if (vertical.length > 0) {
-                output.push(...vertical);
-            }
-        }
-        if (horizontal) {
-            if (horizontal.length > 0) {
-                output.push(...horizontal);
-            }
-        }
-        return output;
     }
 
 
@@ -243,6 +86,10 @@ class Grid
     }
 
 
+    /**
+     * Open all spaces containing mines
+     * Run on game over
+     */
     openAllMines()
     {
         this.flattenedSpaces.forEach(space => {
@@ -332,7 +179,12 @@ class Grid
                     mineCount++;
                 }
             });
-            space.borderingMinesCount = mineCount;
+            if (mineCount === 0) {
+                space.isEmpty = true;
+            } else {
+                space.isEmpty = false;
+                space.borderingMinesCount = mineCount;
+            }
         }
     }
 

@@ -4,12 +4,6 @@ const gameArea = document.getElementById('gameArea');
 const gameStatus = document.getElementById('game-status');
 
 
-document.getElementById('start').addEventListener('click', e => {
-    game.start()
-    gameArea.style.display = 'flex';
-});
-
-
 grid.addEventListener('click', e => {
     // handle game logic
     game.handleClick(e);
@@ -48,4 +42,5 @@ gameStatus.addEventListener('mouseup', e => {
     event.target.classList.remove('down-smiley');
     event.target.className = 'smiley';
 });
+
 gameStatus.addEventListener('click', e => game.start());
