@@ -30,31 +30,22 @@ class Grid
     openAdjoiningSpaces(space)
     {
         if (space.isEmpty) {
-
             let loop = true;
             var toOpen = [ ...this.getBorderingSpaces(space).filter(space => !space.hasMine)];
-
-
             while (loop) {
-                const next = [];
-
+                const next = new Array();
                 toOpen.forEach(space => {
-
                     if (!space.hasMine && space.status !== 'open' && space.isEmpty) {
                         const neighbouring = this.getBorderingSpaces(space);
                         next.push( ...neighbouring);
                     }
-
                     this.openSpace(space.id);
                 });
-
                 if (next.length > 0) {
                     toOpen = next;
                 } else {
                     loop = false;
                 }
-
-
             }
         }
     }
