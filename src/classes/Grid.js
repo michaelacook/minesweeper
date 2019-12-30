@@ -7,7 +7,7 @@ class Grid
         this.columns = cols;
         this.spaces = this.createSpaces(this.columns, this.rows);
         this.drawGrid();
-        this.addMines(10);
+        this.addMines(40);
         this.addBorderingSpacesProperty();
         this.addHasBorderingMinesProperty();
     }
@@ -247,6 +247,10 @@ class Grid
     }
 
 
+    /**
+     * Get a one dimensional array of all spaces on the grid
+     * @return {Array} flattened
+     */
     get flattenedSpaces()
     {
         const flattened = new Array();

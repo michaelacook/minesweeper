@@ -1,7 +1,7 @@
 class Game
 {
 
-    constructor(difficulty = 'beginner', mines = 10)
+    constructor(difficulty = 'beginner', mines = 40)
     {
         this.difficulty = difficulty;
         this.mines = mines;
@@ -13,7 +13,7 @@ class Game
 
     start()
     {
-        this.grid = new Grid(10, 8);
+        this.grid = new Grid(16, 16);
         this.active = true;
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used

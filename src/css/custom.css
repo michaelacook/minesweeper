@@ -40,17 +40,17 @@ button {
     flex-direction: column;
     justify-content: space-between;
     background-color: #C0C0C0;
-    padding: 10px 10px;
+    padding: 15px 15px;
     border-top: 4px solid #ffffff;
     border-left: 4px solid #ffffff;
     border-bottom: 4px solid #7B7B7B;
     border-right: 4px solid #7B7B7B;
-    width: 341px;
-    height: 520px;
+    width: 641px;
+    height: 740px;
 }
 
 #displays {
-    height: 150px;
+    height: 450px;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -81,7 +81,7 @@ button {
 
 #game-status {
     position: relative;
-    top: 20px;
+    top: 7px;
 }
 
 /* 52px for each smiley */
