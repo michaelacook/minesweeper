@@ -32,36 +32,30 @@ class Grid
         if (space.isEmpty) {
 
             let loop = true;
+            var toOpen = [ ...this.getBorderingSpaces(space).filter(space => !space.hasMine)];
 
-            const neighbouring = this.getBorderingSpaces(space).filter(space => !space.hasMine);
-            neighbouring.forEach(space => this.openSpace(space.id));
-            const next = [];
 
-            // while (loop) {
-            //
-            //     const next = [];
-            //
-            //     toOpen.forEach(space => {
-            //
-            //         this.openSpace(space.id);
-            //
-            //         const neighbouring = this.getBorderingSpaces(space);
-            //
-            //         neighbouring.forEach(space => {
-            //             if (!space.hasMine && space.isEmpty) {
-            //                 next.push(space);
-            //             }
-            //         });
-            //     });
-            //
-            //     if (next.length > 0) {
-            //         toOpen = next;
-            //         break;
-            //     } else {
-            //         loop = false;
-            //     }
-            //
-            // }
+            while (loop) {
+                const next = [];
+
+                toOpen.forEach(space => {
+
+                    if (!space.hasMine && space.status !== 'open' && space.isEmpty) {
+                        const neighbouring = this.getBorderingSpaces(space);
+                        next.push( ...neighbouring);
+                    }
+
+                    this.openSpace(space.id);
+                });
+
+                if (next.length > 0) {
+                    toOpen = next;
+                } else {
+                    loop = false;
+                }
+
+
+            }
         }
     }
 
