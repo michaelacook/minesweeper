@@ -1,7 +1,7 @@
 class Game
 {
 
-    constructor()
+    constructor(difficulty = 'beginner', mines = 40)
     {
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used

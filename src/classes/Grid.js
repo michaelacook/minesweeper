@@ -247,6 +247,10 @@ class Grid
     }
 
 
+    /**
+     * Get a one dimensional array of all spaces on the grid
+     * @return {Array} flattened
+     */
     get flattenedSpaces()
     {
         const flattened = new Array();
