@@ -1,6 +1,5 @@
 body {
     font-family: 'Share Tech Mono', monospace;
-    /* background-color: black; */
 }
 
 table {
@@ -18,9 +17,9 @@ td {
     background-color: #C0C0C0;
     margin: 0;
     padding: 0;
-    width: 41px;
-    height: 41px;
-    border: 4.5px solid;
+    width: 30.75px;
+    height: 30.75px;
+    border: 3.375px solid;
     border-top-color: #ffffff;
     border-right-color: #7B7B7B;
     border-bottom-color: #7B7B7B;
@@ -45,12 +44,12 @@ button {
     border-left: 4px solid #ffffff;
     border-bottom: 4px solid #7B7B7B;
     border-right: 4px solid #7B7B7B;
-    width: 341px;
-    height: 520px;
+    width: 300px;
+    height: 350px;
 }
 
 #displays {
-    height: 150px;
+    height: 100px;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -58,65 +57,62 @@ button {
 
  .flagged {
     background: url(../img/flag.svg);
-    background-size: 39px 39px;
+    background-size: 29.25px 29.25px;
     background-repeat: no-repeat;
  }
 
  .questionmark {
      background: url(../img/questionmark.svg);
-     background-size: 37px 37px;
+     background-size: 27.25px 27.25px;
      background-repeat: no-repeat;
  }
 
  .mine {
      background: url(../img/mine.svg);
-     background-size: 36px 36px;
+     background-size: 27px 27px;
      background-repeat: no-repeat;
  }
 
 .mineCount {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
 #game-status {
+    top: 14%;
+    width: 40px;
+    height: 40px;
     position: relative;
-    top: 20px;
+    background-size: cover;
 }
 
-/* 52px for each smiley */
-
 .smiley {
-    width: 52px;
-    height: 52px;
     background: url(../img/smileysprite.png);
+    background-position: 0 0;
 }
 
 .down-smiley {
-    display: inline-block;
-    width: 52px;
-    height: 52px;
     background: url(../img/smileysprite.png);
-    background-position: -51px 0;
+    background-position: -40px 0;
 }
 
 .o-smiley {
-    width: 52px;
-    height: 52px;
     background: url(../img/smileysprite.png);
-    background-position: -104px 0;
+    background-position: -80px 0;
 }
 
 .lose-smiley {
-    width: 52px;
-    height: 52px;
     background: url(../img/smileysprite.png);
-    background-position: -156px 0;
+    background-position: -120px 0;
 }
 
 .win-smiley {
-    width: 52px;
-    height: 52px;
     background: url(../img/smileysprite.png);
-    background-position: -208px 0;
+    background-position: -160px 0;
+}
+
+.controls {
+    diplay: inline-block;
+    margin-left: 4px;
+    margin-bottom:3px;
 }

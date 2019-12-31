@@ -7,20 +7,44 @@
         <link rel="stylesheet" href="src/css/custom.css" />
     </head>
     <body>
-        <h1>Minesweeper</h1>
-        
-        <div id="gameArea">
-            <div id="displays">
-                <!-- <div style="background-color:black;">Mine Count</div> -->
+        <div class="container">
 
-                <div class="smiley" id="game-status"></div>
+            <div class="controls">
 
-                <!-- <div>Clock</div> -->
+                <select id="difficulty">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="expert">Expert</option>
+                </select>
+
+                <select id="grid-size">
+                    <option value="">Size</option>
+                    <option value="">50%</option>
+                    <option value="">100%</option>
+                    <option value="">150%</option>
+                </select>
+
+                <select id="color-scheme">
+                    <option value="bright">Default</option>
+                    <option value="night">Night Mode</option>
+                    <option value="win98">Win98</option>
+                </select>
             </div>
-            <table id="grid" cellspacing="0"></table>
+
+            <div id="gameArea">
+                <div id="displays">
+                    <!-- <div style="background-color:black;">Mine Count</div> -->
+
+                    <div class="smiley" id="game-status"></div>
+
+                    <!-- <div>Clock</div> -->
+                </div>
+                <table id="grid" cellspacing="0"></table>
+            </div>
         </div>
     </body>
 
+    <script type="text/javascript" src="src/settings.js"></script>
     <script type="text/javascript" src="src/classes/Space.js"></script>
     <script type="text/javascript" src="src/classes/Grid.js"></script>
     <script type="text/javascript" src="src/classes/Game.js"></script>

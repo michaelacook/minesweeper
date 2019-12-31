@@ -1,13 +1,13 @@
 class Grid
 {
 
-    constructor(rows, cols)
+    constructor(rows, cols, mines)
     {
         this.rows = rows;
         this.columns = cols;
         this.spaces = this.createSpaces(this.columns, this.rows);
         this.drawGrid();
-        this.addMines(10);
+        this.addMines(mines);
         this.addBorderingSpacesProperty();
         this.addHasBorderingMinesProperty();
     }

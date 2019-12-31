@@ -1,22 +1,22 @@
 class Game
 {
 
-    constructor(difficulty = 'beginner', mines = 10)
+    constructor()
     {
-        this.difficulty = difficulty;
-        this.mines = mines;
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used
-        this.start(); // automatically start game on page load
+        this.start(beginner); // automatically start game on page load
     }
 
 
-    start()
+    start(difficulty)
     {
-        this.grid = new Grid(10, 8);
+        const {rows, columns, mines} = difficulty;
+        this.grid = new Grid(rows, columns, mines);
         this.active = true;
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used
+        this.mines = mines;
     }
 
 
