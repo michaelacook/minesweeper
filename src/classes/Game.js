@@ -46,9 +46,15 @@ class Game
 
     /**
      * Checks for a win, toggle class for smiley button
+     * NEED TO REFACTOR SO WIN ONLY HAPPENS WHEN ALL SPACES HAVE BEEN CLICKED
      */
     checkForWin()
     {
+        for (let space of this.grid.flattenedSpaces) {
+            if (space.status === null) {
+                return;
+            }
+        }
         if (this.flaggedMines === this.mines) {
             this.active = false;
             document.getElementById('game-status').classList.remove('smiley');
@@ -98,10 +104,12 @@ class Game
                const space = this.grid.getSpaceById(event.target.id);
                if (space.status == null) {
                    this.grid.openSpace(space.id);
+                   this.checkForWin()
                    if (this.checkForGameOver(space)) {
                        return;
                    }
                    this.grid.openAdjoiningSpaces(space);
+
                 }
             }
         }
