@@ -95,13 +95,13 @@ class Game
                 this.handleRightClicks(event.target.id);
                 this.checkForWin();
             } else if (event.type === 'click') {
-                       const space = this.grid.getSpaceById(event.target.id);
-                       if (space.status == null) {
-                           this.grid.openSpace(space.id);
-                           if (this.checkForGameOver(space)) {
-                               return;
-                           }
-                           this.grid.openAdjoiningSpaces(space);
+               const space = this.grid.getSpaceById(event.target.id);
+               if (space.status == null) {
+                   this.grid.openSpace(space.id);
+                   if (this.checkForGameOver(space)) {
+                       return;
+                   }
+                   this.grid.openAdjoiningSpaces(space);
                 }
             }
         }
