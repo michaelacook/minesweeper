@@ -39,24 +39,27 @@ button {
     flex-direction: column;
     justify-content: space-between;
     background-color: #C0C0C0;
-    padding: 10px 10px;
+    padding: 9px 9px;
     border-top: 5px solid #ffffff;
     border-left: 5px solid #ffffff;
     border-bottom: 5px solid #7B7B7B;
     border-right: 5px solid #7B7B7B;
     width: 287px;
-    height: 349px;
 }
 
 #displays {
-    height: 100px;
+    padding:7px;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+    border-bottom: 5px solid #ffffff;
+    border-right: 5px solid #ffffff;
+    border-top: 5px solid #7B7B7B;
+    border-left: 5px solid #7B7B7B;
+    margin-bottom: 10px;
 }
 
 #game-status {
-    top: 10%;
     width: 40px;
     height: 40px;
     position: relative;

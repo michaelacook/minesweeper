@@ -44,15 +44,14 @@ document.querySelector('.controls').addEventListener('change', e => {
         if (e.target.value == 'beginner') {
             game.start(beginner);
             gameArea.style.width = '287px';
-            gameArea.style.height = '350px';
+            gameArea.style.height = '';
         } else if (e.target.value == 'intermediate') {
             game.start(intermediate);
             gameArea.style.width = '502.25px';
-            gameArea.style.height = '575.75px';
+            gameArea.style.height = '578.75px';
         } else if (e.target.value == 'expert') {
             game.start(expert);
             gameArea.style.width = '932.75px';
-            gameArea.style.height = '567.75px';
         }
     }
     if (e.target.id == 'size') {
