@@ -13,6 +13,9 @@ class Grid
     }
 
 
+    /**
+     * Generate Space objects for grid 
+     */
     createSpaces(cols, rows)
     {
         const spaces = new Array();
@@ -27,6 +30,10 @@ class Grid
     }
 
 
+    /**
+     * Open all connected spaces on click of empty space
+     * @param {Object} space - Space object representing clicked space on grid
+     */
     openAdjoiningSpaces(space)
     {
         if (space.isEmpty) {
@@ -58,13 +65,12 @@ class Grid
      */
     openSpace(id)
     {
-        const el = document.getElementById(id);
         const space = this.getSpaceById(id);
         if (space.status === 'flagged' || space.status === 'questionmark') {
             return;
         }
-        el.style.backgroundColor = "#C0C0C0";
-        el.style.border = "1.5px solid #7B7B7B";
+        const el = document.getElementById(id);
+        el.style.border = "1.63px solid #7B7B7B";
         this.drawMine(space);
         this.drawBorderingMinesCount(space);
         space.status = 'open';
@@ -85,57 +91,69 @@ class Grid
     }
 
 
+    /**
+     * Generate and render grid html
+     */
     drawGrid()
     {
-        let grid = "<tbody>";
+        let grid = "";
         this.spaces.forEach(row => {
-            grid += "<tr>";
-            row.forEach(space => grid += `<td id=${space.id}></td>`);
-            grid += "</tr>";
+            row.forEach(space => grid += `<div class="cell" id=${space.id}></div>`);
+            grid += "<br>";
         });
-        grid += "</tbody>";
         document.getElementById('grid').innerHTML = grid;
     }
 
 
+    /**
+     * Query grid spaces and return the space matching the given DOM id
+     * @param {String} id - DOM id for desired space
+     * @return {object} space
+     * @return {Bool} false on fail to find space
+     */
     getSpaceById(id)
     {
-        let space;
-        for (let item of this.flattenedSpaces) {
-            if (item.id === id) {
-                space = item;
-                break;
+        for (let space of this.flattenedSpaces) {
+            if (space.id === id) {
+                if (space !== undefined) {
+                    return space;
+                } else {
+                    continue;
+                }
             }
         }
-        if (space !== undefined) {
-            return space;
-        } else {
-            return false;
-        }
+        return false;
     }
 
 
+    /**
+     * Get an array of all bordering spaces for a target space
+     * @param {Object} space - target Space object
+     * @return {Array} bordering
+     */
     getBorderingSpaces(space)
     {
         const bordering = new Array();
-        const items = [
-        this.getSpaceById(`col-${space.x}-row-${space.y - 1}`),
+        [this.getSpaceById(`col-${space.x}-row-${space.y - 1}`),
         this.getSpaceById(`col-${space.x + 1}-row-${space.y - 1}`),
         this.getSpaceById(`col-${space.x + 1}-row-${space.y}`),
         this.getSpaceById(`col-${space.x + 1}-row-${space.y + 1}`),
         this.getSpaceById(`col-${space.x}-row-${space.y + 1}`),
         this.getSpaceById(`col-${space.x - 1}-row-${space.y + 1}`),
         this.getSpaceById(`col-${space.x - 1}-row-${space.y}`),
-        this.getSpaceById(`col-${space.x - 1}-row-${space.y - 1}`)];
-        items.forEach(item => {
-            if (item) {
-                bordering.push(item);
+        this.getSpaceById(`col-${space.x - 1}-row-${space.y - 1}`)
+        ].forEach(space => {
+            if (space) {
+                bordering.push(space);
             }
         });
         return bordering;
     }
 
 
+    /**
+     * Call getBorderingSpaces method on each space on the grid
+     */
     addBorderingSpacesProperty()
     {
         this.flattenedSpaces.forEach(space => {
@@ -145,6 +163,9 @@ class Grid
     }
 
 
+    /**
+     * Call getBorderingSpaces method on each space
+     */
     addHasBorderingMinesProperty()
     {
         this.flattenedSpaces.forEach(space => {
@@ -153,6 +174,10 @@ class Grid
     }
 
 
+    /**
+     * Add number of mines in neighbouring spaces to a space
+     * @param {Object} space - target Space object
+     */
     getBorderingMineCount(space)
     {
         if (space.hasMine) {
@@ -174,6 +199,10 @@ class Grid
     }
 
 
+    /**
+     * Render mine count for space
+     * @param {Object} space - target Space object
+     */
     drawBorderingMinesCount(space)
     {
         const mineCount = space.borderingMinesCount;
@@ -196,36 +225,72 @@ class Grid
             } else if (mineCount == 1) {
                 el.style.color = '#0E00FB';
             }
-            el.innerHTML = `<span class="mineCount">${mineCount}</span>`;
+            el.textContent = `${mineCount}`;
         }
     }
 
 
+    /**
+     * Render mine on target element
+     * @param {Object} space - Space object representing grid space element
+     */
     drawMine(space)
     {
         if (space.hasMine) {
-            document.getElementById(space.id).className = "mine";
+            document.getElementById(space.id).classList.add("mine");
         }
     }
 
 
+    /**
+     * Add minestrike to all spaces that were flagged by mistake
+     * @return {bool} true
+     * Used as condition for highlighting missed mine
+     */
+    minestrike()
+    {
+        this.flattenedSpaces.forEach(space => {
+            if (space.status == 'flagged' && !space.hasMine) {
+                const neighbouring = this.getBorderingSpaces(space);
+                const el = document.getElementById(space.id);
+                el.classList.remove('flagged');
+                el.style.border = "1.63px solid #7B7B7B";
+                el.textContent = '';
+                el.classList.add('mine-strike');
+            }
+        });
+    }
+
+
+    /**
+     * Flag right-clicked space
+     * @param {String} id - DOM id of clicked space
+     */
     flagSpace(id)
     {
         const space = this.getSpaceById(id);
-        document.getElementById(id).className = "flagged";
+        document.getElementById(id).classList.add("flagged");
         space.status = 'flagged';
     }
 
 
+    /**
+     * Question-mark right-clicked space
+     * @param {String} id - DOM id of clicked space
+     */
     questionMarkSpace(id)
     {
         const space = this.getSpaceById(id);
         document.getElementById(id).classList.remove("flagged")
-        document.getElementById(id).className = "questionmark";
+        document.getElementById(id).classList.add("questionmark");
         space.status = 'questionmark';
     }
 
 
+    /**
+     * Remove question mark from space element
+     * @param {String} id - DOM id of target space
+     */
     clearSpace(id)
     {
         const space = this.getSpaceById(id);
@@ -235,6 +300,10 @@ class Grid
     }
 
 
+    /**
+     * Select random spaces to plant mines
+     * @param {Number} numberOfMines - the number of mines to plant
+     */
     addMines(numberOfMines)
     {
         const copyOfSpaces = this.flattenedSpaces;

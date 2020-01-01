@@ -4,24 +4,23 @@
         <meta charset="utf-8">
         <title>Minesweeper</title>
         <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="src/css/custom.css" />
+        <link rel="stylesheet" href="src/css/styles.css" />
     </head>
     <body>
         <div class="container">
-
             <div class="controls">
-
                 <select id="difficulty">
                     <option value="beginner">Beginner</option>
                     <option value="intermediate">Intermediate</option>
                     <option value="expert">Expert</option>
                 </select>
 
-                <select id="grid-size">
+                <select id="size">
                     <option value="">Size</option>
-                    <option value="">50%</option>
-                    <option value="">100%</option>
-                    <option value="">150%</option>
+                    <option value="75">75%</option>
+                    <option value="100">100%</option>
+                    <option value="125">125%</option>
+                    <option value="150">150%</option>
                 </select>
 
                 <select id="color-scheme">
@@ -39,7 +38,7 @@
 
                     <!-- <div>Clock</div> -->
                 </div>
-                <table id="grid" cellspacing="0"></table>
+                <div id="grid"></div>
             </div>
         </div>
     </body>
