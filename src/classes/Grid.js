@@ -14,7 +14,7 @@ class Grid
 
 
     /**
-     * Generate Space objects for grid 
+     * Generate Space objects for grid
      */
     createSpaces(cols, rows)
     {
@@ -208,24 +208,13 @@ class Grid
         const mineCount = space.borderingMinesCount;
         if (mineCount > 0) {
             const el = document.getElementById(space.id);
-            if (mineCount == 8) {
-                el.style.color = '#808080';
-            } else if (mineCount == 7) {
-                el.style.color = 'black';
-            } else if (mineCount == 6) {
-                el.style.color = '#00807F';
-            } else if (mineCount == 5) {
-                el.style.color = '#810202';
-            } else if (mineCount == 4) {
-                el.style.color = '#040280';
-            } else if (mineCount == 3) {
-                el.style.color = '#FD0A00';
-            } else if (mineCount == 2) {
-                el.style.color = '#037E00';
-            } else if (mineCount == 1) {
-                el.style.color = '#0E00FB';
+            if (mineCount > 0) {
+                const el = document.getElementById(space.id);
+                const colors = ['#0E00FB', '#037E00', '#FD0A00', '#040280',
+                                '#810202', '#00807F',  'black',  '#808080'];
+                el.style.color = colors[mineCount - 1];
+                el.textContent = `${mineCount}`;
             }
-            el.textContent = `${mineCount}`;
         }
     }
 
