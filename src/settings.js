@@ -40,6 +40,8 @@ document.querySelector('.controls').addEventListener('change', e => {
     }
     if (e.target.id == 'difficulty') {
         gameStatus.className = 'smiley';
+        game.stopTimer();
+        timer.innerHTML = '000';
         const gameArea = document.getElementById('gameArea');
         if (e.target.value == 'beginner') {
             game.start(beginner);

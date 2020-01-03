@@ -3,6 +3,7 @@ class Game
 
     constructor()
     {
+        this.timerStarted = false;
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used
         this.start(); // automatically start game on page load
@@ -22,6 +23,7 @@ class Game
         this.flaggedMines = 0; // whenever a bomb is flagged
         this.flags = 0; // whenever a flag is used
         this.mines = mines;
+        this.updateMineCount();
     }
 
 
@@ -33,6 +35,7 @@ class Game
     checkForGameOver(space)
     {
         if (space.hasMine) {
+            this.stopTimer();
             this.active = false;
             this.grid.minestrike();
             this.grid.openAllMines(space);
@@ -46,7 +49,6 @@ class Game
 
     /**
      * Checks for a win, toggle class for smiley button
-     * NEED TO REFACTOR SO WIN ONLY HAPPENS WHEN ALL SPACES HAVE BEEN CLICKED
      */
     checkForWin()
     {
@@ -56,6 +58,7 @@ class Game
             }
         }
         if (this.flaggedMines === this.mines) {
+            this.stopTimer();
             this.active = false;
             document.getElementById('game-status').classList.remove('smiley');
             document.getElementById('game-status').className = 'win-smiley';
@@ -82,11 +85,13 @@ class Game
                     this.flaggedMines++;
                 }
             } else if (space.rightClicks === 2) {
+                this.flags--;
                 this.grid.questionMarkSpace(id);
             } else if (space.rightClicks === 3) {
                 this.grid.clearSpace(id);
             }
         }
+        this.updateMineCount();
     }
 
 
@@ -113,5 +118,54 @@ class Game
                 }
             }
         }
+    }
+
+
+    /**
+     * Update mine count visual display
+     */
+    updateMineCount()
+    {
+        const count = this.mines - this.flags;
+        let display;
+        if (count < 0) {
+            display = `-${count > -10 ? "0" : ""}${count * -1}`;
+        } else {
+            display = `${count > 9 ? "0" : "00"}${count}`;
+        }
+        document.getElementById('mineCount').innerHTML = display;
+    }
+
+
+    /**
+     * Stop game timer
+     */
+    stopTimer()
+    {
+        this.timerStarted = false;
+        clearInterval(this.timerID);
+    }
+
+
+    /**
+     * Start game timer
+     */
+    startTimer() {
+        let seconds = 1;
+        this.timerStarted = true;
+        this.timerID = setInterval(() => {
+            const el = document.getElementById('timer');
+            if (seconds < 10) {
+                el.innerHTML = `00${seconds}`;
+            } else if (seconds < 100) {
+                el.innerHTML = `0${seconds}`;
+            } else {
+                el.innerHTML = seconds;
+            }
+            if (seconds === 999) {
+                clearInterval(this.timerID);
+            }
+            seconds++;
+        }, 1000);
     }
 }

@@ -4,11 +4,15 @@ const game = new Game();
 const grid = document.getElementById('grid');
 const gameArea = document.getElementById('gameArea');
 const gameStatus = document.getElementById('game-status');
+const timer = document.getElementById('timer');
 
 
-// Handle main game logic
+// Handle main game logic, start timer on first click
 grid.addEventListener('click', e => {
     game.handleClick(e);
+    if (game.active && !game.timerStarted) {
+        game.startTimer();
+    }
 });
 
 
@@ -45,6 +49,8 @@ grid.addEventListener('mouseup', e => {
 // Start game with desired difficulty
 document.getElementById('game-status').addEventListener('click', e => {
     const difficulty = document.getElementById('difficulty').value;
+    game.stopTimer();
+    timer.innerHTML = '000';
     switch (difficulty) {
         case 'beginner':
             game.start(beginner);
