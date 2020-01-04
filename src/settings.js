@@ -41,7 +41,6 @@ document.querySelector('.controls').addEventListener('change', e => {
     e.target.blur();
     const children = document.querySelector('.controls').children;
     if (e.target.id == 'color-scheme') {
-        console.log(e.target.value)
         localStorage.clear();
         localStorage.setItem('option', e.target.value);
         if (e.target.value == 'default') {
