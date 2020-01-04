@@ -1,5 +1,34 @@
 /* Handles game and display settings */
 
+// Handle local storage of display settings on page refresh
+const children = document.querySelector('.controls').children;
+const bgColour = localStorage.getItem('bg-colour');
+const txtColour = localStorage.getItem('txt-colour');
+const fntWeight = localStorage.getItem('fnt-weight');
+const bdrColour = localStorage.getItem('bdr-colour');
+const option = localStorage.getItem('option');
+
+if (bgColour) {
+    document.body.style.backgroundColor = bgColour;
+}
+if (option) {
+    document.getElementById('color-scheme').value = option;
+}
+for (let child of children) {
+    if (txtColour) {
+        child.style.color = txtColour;
+    }
+    if (fntWeight) {
+        child.style.fontWeight = fntWeight;
+    }
+    if (bdrColour) {
+        child.style.borderColor = bdrColour;
+    }
+    if (bgColour) {
+        child.style.backgroundColor = bgColour;
+    }
+}
+
 
 // Game difficulty settings
 const beginner = {rows: 9, columns: 9, mines: 10}
@@ -12,7 +41,10 @@ document.querySelector('.controls').addEventListener('change', e => {
     e.target.blur();
     const children = document.querySelector('.controls').children;
     if (e.target.id == 'color-scheme') {
-        if (e.target.value == 'bright') {
+        console.log(e.target.value)
+        localStorage.clear();
+        localStorage.setItem('option', e.target.value);
+        if (e.target.value == 'default') {
             document.body.style.backgroundColor = "";
             for (let child of children) {
                 child.style.color = 'black';
@@ -21,21 +53,29 @@ document.querySelector('.controls').addEventListener('change', e => {
                 child.style.border = '';
             }
         } else if (e.target.value == 'night') {
-            document.body.style.backgroundColor = "black";
+            localStorage.setItem('bg-colour', 'black');
+            localStorage.setItem('txt-colour', '#3CB371');
+            localStorage.setItem('fnt-weight', 'bold');
+            localStorage.setItem('bdr-colour', 'black');
             for (let child of children) {
                 child.style.color = '#3CB371';
                 child.style.backgroundColor = 'black';
                 child.style.borderColor = 'black';
                 child.style.fontWeight = 'bold';
             }
+            document.body.style.backgroundColor = "black";
         } else if (e.target.value == 'win98') {
+            localStorage.setItem('bg-colour', '#007D7E');
+            localStorage.setItem('txt-colour', 'white');
+            localStorage.setItem('fnt-weight', 'bold');
+            localStorage.setItem('bdr-colour', '#007D7E');
             for (let child of children) {
-                document.body.style.backgroundColor = '#007D7E';
                 child.style.color = 'white';
                 child.style.backgroundColor = '#007D7E';
                 child.style.borderColor = '#007D7E';
                 child.style.fontWeight = 'bold';
             }
+            document.body.style.backgroundColor = '#007D7E';
         }
     }
     if (e.target.id == 'difficulty') {
