@@ -45,7 +45,7 @@ document.querySelector('.controls').addEventListener('change', e => {
         localStorage.clear();
         localStorage.setItem('option', e.target.value);
         if (e.target.value == 'default') {
-            document.body.style.backgroundColor = "";
+            document.body.style.backgroundColor = "white";
             for (let child of children) {
                 child.style.color = 'black';
                 child.style.backgroundColor = '';
