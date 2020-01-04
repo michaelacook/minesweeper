@@ -19,7 +19,7 @@ class Grid
     createSpaces(cols, rows)
     {
         const spaces = new Array();
-        for (let i = 0; i < rows; i++) {
+        for (let i = 0; i < cols; i++) {
             const row = new Array();
             for (let j = 0; j < cols; j++) {
                 row.push(new Space(j, i));
