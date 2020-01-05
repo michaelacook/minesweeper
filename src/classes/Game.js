@@ -86,7 +86,7 @@ class Game
                 }
             } else if (space.rightClicks === 2) {
                 this.flags--;
-                if (this.flaggedMines > 0) {
+                if (space.hasMine) {
                     this.flaggedMines--;
                 }
                 this.grid.questionMarkSpace(id);
