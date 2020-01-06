@@ -6,6 +6,7 @@ class Grid
         this.rows = rows;
         this.columns = cols;
         this.spaces = this.createSpaces(this.columns, this.rows);
+        this.mines = null;
         this.drawGrid();
         this.addMines(mines);
         this.addBorderingSpacesProperty();
@@ -83,11 +84,7 @@ class Grid
      */
     openAllMines()
     {
-        this.flattenedSpaces.forEach(space => {
-            if (space.hasMine) {
-                this.openSpace(space.id);
-            }
-        });
+        this.mines.forEach(mine => this.openSpace(mine.id));
     }
 
 
@@ -292,16 +289,20 @@ class Grid
     /**
      * Select random spaces to plant mines
      * @param {Number} numberOfMines - the number of mines to plant
+     * Add array of mines to mines property on the object
      */
     addMines(numberOfMines)
     {
         const copyOfSpaces = this.flattenedSpaces;
+        const mines = new Array();
         for (let i = 0; i < numberOfMines; i++) {
             const randomSpace = copyOfSpaces[Math.floor(Math.random() * copyOfSpaces.length)]
             const space = this.getSpaceById(randomSpace.id);
             space.hasMine = true;
+            mines.push(space);
             copyOfSpaces.splice(copyOfSpaces.indexOf(randomSpace), 1);
         }
+        this.mines = mines;
     }
 
 
