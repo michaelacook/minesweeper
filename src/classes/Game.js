@@ -49,20 +49,17 @@ class Game
 
     /**
      * Checks for a win, toggle class for smiley button
+     * Win happens when all non-mine spaces have a status of "open"
      */
     checkForWin()
     {
-        for (let space of this.grid.flattenedSpaces) {
-            if (space.status === null) {
-                return;
-            }
-        }
-        if (this.flaggedMines === this.mines) {
-            this.stopTimer();
-            this.active = false;
-            document.getElementById('game-status').classList.remove('smiley');
-            document.getElementById('game-status').className = 'win-smiley';
-        }
+        const openNonMines = this.grid.flattenedSpaces
+            .filter(space => !space.hasMine && !space.status);
+        if (openNonMines.length > 0) return;
+        this.stopTimer();
+        this.active = false;
+        document.getElementById('game-status').classList.remove('smiley');
+        document.getElementById('game-status').className = 'win-smiley';
     }
 
 
