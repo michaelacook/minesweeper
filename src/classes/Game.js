@@ -109,12 +109,11 @@ class Game
                const space = this.grid.getSpaceById(event.target.id);
                if (space.status == null) {
                    this.grid.openSpace(space.id);
-                   this.checkForWin()
                    if (this.checkForGameOver(space)) {
                        return;
                    }
                    this.grid.openAdjoiningSpaces(space);
-
+                   this.checkForWin()
                 }
             }
         }
