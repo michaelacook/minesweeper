@@ -24,6 +24,9 @@ const gameArea = document.getElementById("gameArea")
 const gameStatus = document.getElementById("game-status")
 const timer = document.getElementById("timer")
 
+// make the Windows 98 seagreen color the default rather than the bare white
+setWin98Theme(Array.from(document.querySelector(".controls").children))
+
 // Handle main game logic, start timer on first click
 grid.addEventListener("click", (e) => {
   game.handleClick(e)
